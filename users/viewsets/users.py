@@ -6,7 +6,7 @@ import json
 
 users_router = Blueprint('users', __name__, url_prefix='/users')
 
-@users_router.route('/')
+@users_router.route('/', methods=['GET'])
 def users():
     arr = []
     faker = Faker()
