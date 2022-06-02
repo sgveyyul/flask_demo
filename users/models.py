@@ -1,4 +1,4 @@
-from demo.app import db
+from database import db
 
 class Base(db.Model):
     __abstract__  = True
@@ -11,7 +11,7 @@ class Base(db.Model):
 
 # Define a User model
 class User(Base):
-    __tablename__ = 'auth_user'
+    __tablename__ = 'user'
     
     firstname = db.Column(db.String(128), nullable=False)
     lastname  = db.Column(db.String(128), nullable=False)
