@@ -6,8 +6,12 @@ from database import db
 
 from users.models import User
 from users.serializers import UserSchema
+from users.producer import producer
 
 from faker import Faker
+
+import json
+from kafka import KafkaProducer
 
 users_router = Blueprint('users', __name__, url_prefix='/users')
 
@@ -28,15 +32,9 @@ def users():
             data=UserSchema(many=True).dump(users))
     if request.method == 'POST':
         data = request.json
-        user = User(
-            firstname=data.get("firstname", ""),
-            lastname=data.get("lastname", ""),
-            middlename=data.get("middlename", ""),
-            birthday=data.get("birthday", ""),
-            address=data.get("address", ""),
-        )
-        db.session.add(user)
-        db.session.commit()
+        
+        producer.send('demo', value=data)
+        
         response = jsonify(
             success=True,
             message='Success',
