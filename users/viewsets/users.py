@@ -35,6 +35,16 @@ def users():
         
         producer.send('demo', value=data)
         
+        # user = User(
+        #     firstname=data.get("firstname", ""),
+        #     lastname=data.get("lastname", ""),
+        #     middlename=data.get("middlename", ""),
+        #     birthday=data.get("birthday", ""),
+        #     address=data.get("address", ""),
+        # )
+        # db.session.add(user)
+        # db.session.commit()
+
         response = jsonify(
             success=True,
             message='Success',
